@@ -1,5 +1,7 @@
-import { v4 as createUuid } from "uuid";
+import { ICardRepository } from "../../../repositories/card-repository";
+import { InvalidValueError } from "../../../util/errors/invalid-value-error";
 import { List, ICard } from "./../../../entities/card";
+import { CreateCardParams, CreateCardUseCase } from "./create-card-usecase";
 /*
     Requisitos:
 
@@ -9,53 +11,9 @@ import { List, ICard } from "./../../../entities/card";
 
 */
 
-export interface CreateCardParams {
-    title: string;
-    content: string;
-    list: List;
-}
-
-export interface ICardRepository {
-    create: (card: ICard) => Promise<void>;
-}
-
 class MockCardRepository implements ICardRepository {
-    async create(card: ICard) {
+    async create(_: ICard) {
         return;
-    }
-}
-
-class CreateCardUseCase {
-    constructor(private repository: ICardRepository) {}
-
-    async run(params: CreateCardParams): Promise<ICard> {
-        if (params.content.length == 0 || params.content.length > 100) {
-            throw new InvalidValueError("content");
-        }
-
-        if (params.title.length == 0 || params.title.length > 50) {
-            throw new InvalidValueError("title");
-        }
-
-        const id = createUuid();
-        const card = { ...params, id };
-
-        await this.repository.create(card);
-
-        return card;
-    }
-}
-
-class DomainError extends Error {
-    constructor(message: string, public code?: number) {
-        super(message);
-        this.code = code ?? 400;
-    }
-}
-
-class InvalidValueError extends DomainError {
-    constructor(value: string) {
-        super(`Value of ${value} is invalid.`);
     }
 }
 

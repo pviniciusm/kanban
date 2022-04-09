@@ -1,3 +1,4 @@
+import { v4 as createUuid } from "uuid";
 import { List, ICard } from "./../../../entities/card";
 /*
     Requisitos:
@@ -14,8 +15,20 @@ export interface CreateCardParams {
     list: List;
 }
 
+export interface ICardRepository {
+    create: (card: ICard) => Promise<void>;
+}
+
+class MockCardRepository implements ICardRepository {
+    async create(card: ICard) {
+        return;
+    }
+}
+
 class CreateCardUseCase {
-    async run(params: CreateCardParams) {
+    constructor(private repository: ICardRepository) {}
+
+    async run(params: CreateCardParams): Promise<ICard> {
         if (params.content.length == 0 || params.content.length > 100) {
             throw new InvalidValueError("content");
         }
@@ -23,6 +36,13 @@ class CreateCardUseCase {
         if (params.title.length == 0 || params.title.length > 50) {
             throw new InvalidValueError("title");
         }
+
+        const id = createUuid();
+        const card = { ...params, id };
+
+        await this.repository.create(card);
+
+        return card;
     }
 }
 
@@ -41,8 +61,10 @@ class InvalidValueError extends DomainError {
 
 describe("create card use case tests", () => {
     const makeSut = () => {
-        const sut = new CreateCardUseCase();
-        const data = {
+        const mockRepository = new MockCardRepository();
+
+        const sut = new CreateCardUseCase(mockRepository);
+        const data: CreateCardParams = {
             content: "any_content",
             title: "any_title",
             list: List.toDo,
@@ -89,5 +111,17 @@ describe("create card use case tests", () => {
         } catch (error) {
             expect(error).toBeInstanceOf(InvalidValueError);
         }
+    });
+
+    test("should return a created Card object if all provided data is ok", async () => {
+        const { data, sut } = makeSut();
+
+        expect.assertions(4);
+
+        const result: ICard = await sut.run(data);
+        expect(result).not.toBeFalsy();
+        expect(result.id).not.toBeFalsy();
+        expect(result.content).toEqual(data.content);
+        expect(result.title).toEqual(data.title);
     });
 });

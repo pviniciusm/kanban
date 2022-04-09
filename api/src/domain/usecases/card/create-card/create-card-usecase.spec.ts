@@ -16,11 +16,11 @@ export interface CreateCardParams {
 
 class CreateCardUseCase {
     async run(params: CreateCardParams) {
-        if (params.content.length == 0) {
+        if (params.content.length == 0 || params.content.length > 100) {
             throw new InvalidValueError("content");
         }
 
-        if (params.title.length == 0) {
+        if (params.title.length == 0 || params.title.length > 50) {
             throw new InvalidValueError("title");
         }
     }
@@ -42,22 +42,19 @@ class InvalidValueError extends DomainError {
 describe("create card use case tests", () => {
     const makeSut = () => {
         const sut = new CreateCardUseCase();
-        return { sut };
-    };
-
-    test("should throw InvalidValueError if content or title are empty", async () => {
-        const { sut } = makeSut();
-
-        let data: CreateCardParams = {
-            content: "abc",
-            title: "",
+        const data = {
+            content: "any_content",
+            title: "any_title",
             list: List.toDo,
         };
 
-        // sut.run(data).catch((error) => {
-        //     expect(error).toBeInstanceOf(InvalidValueError);
-        //     expect(error.message).toEqual("Value of title is invalid.");
-        // });
+        return { sut, data };
+    };
+
+    test("should throw InvalidValueError if content or title are empty", async () => {
+        const { sut, data } = makeSut();
+
+        data.title = "";
 
         expect(sut.run(data)).rejects.toThrowError(InvalidValueError);
 
@@ -69,13 +66,28 @@ describe("create card use case tests", () => {
             expect(error.message).toEqual("Value of content is invalid.");
         });
     });
+
     test("should throw InvalidValueError if content length is bigger than 100 characters", async () => {
-        expect(2).toEqual(1 + 1);
+        const { sut, data } = makeSut();
+        expect.assertions(1);
+
+        data.content = "".padStart(101, "a");
+        try {
+            await sut.run(data);
+        } catch (error) {
+            expect(error).toBeInstanceOf(InvalidValueError);
+        }
     });
+
     test("should throw InvalidValueError if title length is bigger than 50 characters", async () => {
-        expect(2).toEqual(1 + 1);
-    });
-    test("should throw InvalidValueError if content length is bigger than 50 characters", async () => {
-        expect(2).toEqual(1 + 1);
+        const { sut, data } = makeSut();
+        expect.assertions(1);
+
+        data.title = "".padStart(51, "a");
+        try {
+            await sut.run(data);
+        } catch (error) {
+            expect(error).toBeInstanceOf(InvalidValueError);
+        }
     });
 });

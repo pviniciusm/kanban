@@ -1,7 +1,7 @@
-import { List } from "./../../../domain/entities/card";
-import { HttpRequest } from "./../index";
-import { MockCardRepository } from "../../../domain/repositories/mock/mock-card-repository";
-import { CreateCardUseCase } from "../../../domain/usecases";
+import { List } from "../../../../domain/entities/card";
+import { HttpRequest } from "../../index";
+import { MockCardRepository } from "../../../../domain/repositories/mock/mock-card-repository";
+import { CreateCardUseCase } from "../../../../domain/usecases";
 import { CreateCardController } from "./create-card-controller";
 
 describe("create card controller tests", () => {

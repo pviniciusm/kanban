@@ -1,8 +1,8 @@
-import { CreateCardUseCase } from "../../../domain/usecases";
-import { error } from "../../util/handlers/handle-error";
-import { MissingFieldError } from "../../util/errors/missing-field-error";
-import { Controller, HttpRequest, ResponseData } from "../index";
-import { success } from "../../util/handlers/handle-success";
+import { CreateCardUseCase } from "../../../../domain/usecases";
+import { error } from "../../../util/handlers/handle-error";
+import { MissingFieldError } from "../../../util/errors/missing-field-error";
+import { Controller, HttpRequest, ResponseData } from "../../index";
+import { success } from "../../../util/handlers/handle-success";
 
 export class CreateCardController implements Controller {
     constructor(private useCase: CreateCardUseCase) {}

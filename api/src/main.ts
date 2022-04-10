@@ -1,3 +1,4 @@
+import { database } from "./infra/database/typeorm/connection";
 import { Server } from "./infra/server";
 
-Server.init();
+database.init().then(Server.init);

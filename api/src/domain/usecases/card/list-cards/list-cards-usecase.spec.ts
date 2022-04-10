@@ -8,14 +8,7 @@ import {
     getMockCardData,
     MockCardRepositoryWithData,
 } from "./../../../repositories/mock/mock-card-repository";
-
-class ListCardsUseCase implements UseCase {
-    constructor(private repository: ICardRepository) {}
-
-    async run(): Promise<ICard[]> {
-        return this.repository.listAll();
-    }
-}
+import { ListCardsUseCase } from "./list-cards-usecase";
 
 describe("create card use case tests", () => {
     const makeSut = (mockRepository?: ICardRepository) => {

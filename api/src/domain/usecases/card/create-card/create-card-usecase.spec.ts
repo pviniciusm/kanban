@@ -1,21 +1,7 @@
-import { ICardRepository } from "../../../repositories/card-repository";
+import { CreateCardParams, CreateCardUseCase } from "./create-card-usecase";
 import { InvalidValueError } from "../../../util/errors/invalid-value-error";
 import { List, ICard } from "./../../../entities/card";
-import { CreateCardParams, CreateCardUseCase } from "./create-card-usecase";
-/*
-    Requisitos:
-
-    Para inserir um card o título, o conteúdo e o nome da lista devem estar preenchidos, 
-    o id não deve conter valor. Ao inserir retorne o card completo incluindo o id atribuído 
-    com o statusCode apropriado. Caso inválido, retorne status 400.
-
-*/
-
-class MockCardRepository implements ICardRepository {
-    async create(_: ICard) {
-        return;
-    }
-}
+import { MockCardRepository } from "../../../repositories/mock/mock-card-repository";
 
 describe("create card use case tests", () => {
     const makeSut = () => {

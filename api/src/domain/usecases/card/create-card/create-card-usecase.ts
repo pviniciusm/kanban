@@ -1,4 +1,5 @@
 import { v4 as createUuid } from "uuid";
+import { UseCase } from "../..";
 
 import { ICard, List } from "../../../entities/card";
 import { ICardRepository } from "../../../repositories/card-repository";
@@ -10,7 +11,7 @@ export interface CreateCardParams {
     list: List;
 }
 
-export class CreateCardUseCase {
+export class CreateCardUseCase implements UseCase {
     constructor(private repository: ICardRepository) {}
 
     async run(params: CreateCardParams): Promise<ICard> {

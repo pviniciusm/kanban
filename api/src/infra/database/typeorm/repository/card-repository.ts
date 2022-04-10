@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
-import { ICard } from "../../../domain/entities/card";
-import { ICardRepository } from "../../../domain/repositories/card-repository";
-import { database } from "../typeorm/connection";
-import { Card } from "../typeorm/entities/Card";
+import { ICard } from "../../../../domain/entities/card";
+import { ICardRepository } from "../../../../domain/repositories/card-repository";
+import { database } from "../connection";
+import { Card } from "../entities/Card";
 
 export class CardRepository implements ICardRepository {
     private repository: Repository<Card>;

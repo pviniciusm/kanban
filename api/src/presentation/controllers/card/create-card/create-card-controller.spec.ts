@@ -12,19 +12,19 @@ describe("create card controller tests", () => {
 
         const request: HttpRequest = {
             body: {
-                title: "any_title",
-                content: "any_content",
-                list: List.toDo.toString(),
+                titulo: "any_titulo",
+                conteudo: "any_conteudo",
+                lista: List.toDo.toString(),
             },
         };
 
         return { sut, request: { ...request } };
     };
 
-    test("should return code 400 if no title is provided", async () => {
+    test("should return code 400 if no titulo is provided", async () => {
         const { sut, request } = makeSut();
 
-        request.body.title = undefined;
+        request.body.titulo = undefined;
 
         const response = await sut.handle(request);
         expect(response).toBeDefined();
@@ -33,10 +33,10 @@ describe("create card controller tests", () => {
         expect(response.identifier).toEqual("MissingFieldError");
     });
 
-    test("should return code 400 if no content is provided", async () => {
+    test("should return code 400 if no conteudo is provided", async () => {
         const { sut, request } = makeSut();
 
-        request.body.content = undefined;
+        request.body.conteudo = undefined;
 
         const response = await sut.handle(request);
         expect(response).toBeDefined();
@@ -48,7 +48,7 @@ describe("create card controller tests", () => {
     test("should return code 400 if no list is provided", async () => {
         const { sut, request } = makeSut();
 
-        request.body.list = undefined;
+        request.body.lista = undefined;
 
         const response = await sut.handle(request);
         expect(response).toBeDefined();

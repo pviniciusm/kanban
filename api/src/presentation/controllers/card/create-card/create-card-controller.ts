@@ -1,3 +1,5 @@
+import { listMapper } from "./../../../util/helpers/list-mapper";
+import { dataMapper } from "./../../../util/helpers/data-mapper";
 import { CreateCardUseCase } from "../../../../domain/usecases";
 import { error } from "../../../util/handlers/handle-error";
 import { MissingFieldError } from "../../../util/errors/missing-field-error";
@@ -10,22 +12,26 @@ export class CreateCardController implements Controller {
 
     async handle(request: HttpRequest): Promise<ResponseData> {
         try {
-            const { title, content, list } = request.body;
+            const { titulo, conteudo, lista } = request.body;
 
-            if (!title) {
-                throw new MissingFieldError("title");
+            if (!titulo) {
+                throw new MissingFieldError("titulo");
             }
 
-            if (!content) {
-                throw new MissingFieldError("content");
+            if (!conteudo) {
+                throw new MissingFieldError("conteudo");
             }
 
-            if (!list) {
+            if (!lista) {
                 throw new MissingFieldError("list");
             }
 
-            const result = await this.useCase.run({ ...request.body });
-            return success(result, "Create Card", 201);
+            const result = await this.useCase.run({
+                title: titulo,
+                content: conteudo,
+                list: listMapper(lista)!,
+            });
+            return success(dataMapper(result), "Create Card", 201);
         } catch (e) {
             return error(e);
         }

@@ -14,9 +14,13 @@ export const mapRequest = async (
         body: req.body,
         query: req.query,
         headers: req.headers,
+        params: req.params,
     };
 
     const result: ResponseData = await controller.handle(request);
 
-    res.status(result.code).send(result);
+    if ([200, 201].includes(result.code)) {
+        return res.status(result.code).send(result.data);
+    }
+    return res.status(result.code).send(result);
 };

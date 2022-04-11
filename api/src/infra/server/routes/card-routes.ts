@@ -13,6 +13,19 @@ export class CardRoutes {
             mapRequest(req, res, controllers.create)
         );
 
+        routes.put(
+            "/:id",
+            [removeUpdateMiddleware],
+            (req: Request, res: Response) =>
+                mapRequest(req, res, controllers.update)
+        );
+        routes.delete(
+            "/:id",
+            [removeUpdateMiddleware],
+            (req: Request, res: Response) =>
+                mapRequest(req, res, controllers.delete)
+        );
+
         return routes;
     }
 }

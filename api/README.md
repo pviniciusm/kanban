@@ -22,7 +22,7 @@ An API to handle with Kanban cards
 This project was created with an architecture based on 3 layers: domain, presentation and infra. These three layers have separated responsabilities.
 Thus layer communication is done with one-side only as domain never calls any infra or controller resource. This fits the onion architecture concept.
 
-<img src="./arch.png" width="220" />
+<img src="./arch.png" width="500" />
 
 ### Domain
 

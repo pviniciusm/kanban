@@ -2,6 +2,7 @@ export interface HttpRequest {
     body?: any;
     query?: any;
     headers?: any;
+    params?: any;
 }
 
 export interface ResponseData {

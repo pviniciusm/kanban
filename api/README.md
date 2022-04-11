@@ -51,12 +51,6 @@ Go to the API project directory
   cd kanban/api
 ```
 
-Install dependencies
-
-```bash
-  npm install
-```
-
 Copy .env.example to a .env file and fill required data
 
 ```bash
@@ -73,6 +67,12 @@ Required data are:
 -   LOGIN: login username to use on authentication
 -   PASSWORD password to use on authentication
 
+Install dependencies
+
+```bash
+  npm install
+```
+
 Start the server
 
 ```bash
@@ -84,12 +84,12 @@ Start the server
 The API entrypoints are defined as following:
 
 ```bash
-    (POST)      http://0.0.0.0:5000/login/
+    (POST)      /login
 
-    (GET)       http://0.0.0.0:5000/cards/
-    (POST)      http://0.0.0.0:5000/cards/
-    (PUT)       http://0.0.0.0:5000/cards/{id}
-    (DELETE)    http://0.0.0.0:5000/cards/{id}
+    (GET)       /cards
+    (POST)      /cards
+    (PUT)       /cards/{id}
+    (DELETE)    /cards/{id}
 ```
 
 ## Next steps

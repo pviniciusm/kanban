@@ -60,12 +60,27 @@ describe("create card use case tests", () => {
     test("should return a created Card object if all provided data is ok", async () => {
         const { data, sut } = makeSut();
 
-        expect.assertions(4);
-
         const result: ICard = await sut.run(data);
         expect(result).not.toBeFalsy();
         expect(result.id).not.toBeFalsy();
         expect(result.content).toEqual(data.content);
         expect(result.title).toEqual(data.title);
+    });
+
+    test("should throw InvalidValueError if list option is not valid", async () => {
+        const { sut } = makeSut();
+        expect.assertions(1);
+
+        const invalidData = JSON.stringify({
+            content: "any_content",
+            title: "any_title",
+            list: "V",
+        });
+
+        try {
+            await sut.run(JSON.parse(invalidData));
+        } catch (error) {
+            expect(error).toBeInstanceOf(InvalidValueError);
+        }
     });
 });

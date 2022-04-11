@@ -23,6 +23,10 @@ export class CreateCardUseCase implements UseCase {
             throw new InvalidValueError("title");
         }
 
+        if (!Object.values(List).includes(params.list)) {
+            throw new InvalidValueError("list");
+        }
+
         const id = createUuid();
         const card = { ...params, id };
 

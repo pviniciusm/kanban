@@ -11,7 +11,7 @@ export const authorizationMid = (
         const payload = validateJwt(req.headers.authorization);
         req.body.user = payload.user;
     } catch (e) {
-        return res.status(403).send(error(e));
+        return res.status(401).send(error(e));
     }
 
     next();

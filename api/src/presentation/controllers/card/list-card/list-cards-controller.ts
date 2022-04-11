@@ -1,5 +1,6 @@
-import { Controller, HttpRequest, ResponseData } from "../..";
 import { ListCardsUseCase } from "../../../../domain/usecases/card/list-cards/list-cards-usecase";
+import { Controller } from "../../../util/contracts/controller";
+import { HttpRequest, ResponseData } from "../../../util/contracts/http-data";
 import { error } from "../../../util/handlers/handle-error";
 import { success } from "../../../util/handlers/handle-success";
 

@@ -1,8 +1,9 @@
 import { CreateCardUseCase } from "../../../../domain/usecases";
 import { error } from "../../../util/handlers/handle-error";
 import { MissingFieldError } from "../../../util/errors/missing-field-error";
-import { Controller, HttpRequest, ResponseData } from "../../index";
 import { success } from "../../../util/handlers/handle-success";
+import { Controller } from "../../../util/contracts/controller";
+import { HttpRequest, ResponseData } from "../../../util/contracts/http-data";
 
 export class CreateCardController implements Controller {
     constructor(private useCase: CreateCardUseCase) {}
@@ -23,7 +24,7 @@ export class CreateCardController implements Controller {
                 throw new MissingFieldError("list");
             }
 
-            const result = this.useCase.run({ ...request.body });
+            const result = await this.useCase.run({ ...request.body });
             return success(result, "Create Card", 201);
         } catch (e) {
             return error(e);

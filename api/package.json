@@ -9,7 +9,8 @@
         "test:coverage": "jest --silent --noStackTrace --runInBand --coverage",
         "dev": "ts-node-dev --transpile-only --respawn ./src/main.ts",
         "start": "ts-node src/index.ts",
-        "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js"
+        "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js",
+        "postinstall": "npm run typeorm migration:run"
     },
     "keywords": [
         "kanban",

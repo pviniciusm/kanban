@@ -1,7 +1,7 @@
 export enum List {
-    toDo = "T",
-    doing = "P",
-    done = "D",
+    "ToDo" = "T",
+    "Doing" = "P",
+    "Done" = "D",
 }
 
 export interface ICard {

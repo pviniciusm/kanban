@@ -1,3 +1,4 @@
+import { validateCardFields } from "./../../../util/helpers/validate-card-fields";
 import { v4 as createUuid } from "uuid";
 import { UseCase } from "../..";
 
@@ -15,17 +16,7 @@ export class CreateCardUseCase implements UseCase {
     constructor(private repository: ICardRepository) {}
 
     async run(params: CreateCardParams): Promise<ICard> {
-        if (params.content.length == 0 || params.content.length > 100) {
-            throw new InvalidValueError("content");
-        }
-
-        if (params.title.length == 0 || params.title.length > 50) {
-            throw new InvalidValueError("title");
-        }
-
-        if (!Object.values(List).includes(params.list)) {
-            throw new InvalidValueError("list");
-        }
+        validateCardFields(params);
 
         const id = createUuid();
         const card = { ...params, id };

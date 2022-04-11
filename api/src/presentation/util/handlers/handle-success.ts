@@ -1,4 +1,4 @@
-import { ResponseData } from "../../controllers";
+import { ResponseData } from "../contracts/http-data";
 
 export const success = (
     data: any,

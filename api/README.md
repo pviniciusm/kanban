@@ -42,13 +42,13 @@ Every external communication was done on Infra layer. In order to connect with s
 Clone the project
 
 ```bash
-  git clone
+  git clone https://github.com/pviniciusm/kanban.git
 ```
 
-Go to the project directory
+Go to the API project directory
 
 ```bash
-  cd kanban
+  cd kanban/api
 ```
 
 Install dependencies

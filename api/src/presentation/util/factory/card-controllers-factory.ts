@@ -1,5 +1,5 @@
-import { ListCardsUseCase } from "./../../../domain/usecases/card/list-cards/list-cards-usecase";
-import { CreateCardUseCase } from "./../../../domain/usecases/card/create-card/create-card-usecase";
+import { ListCardsUseCase } from "../../../domain/usecases/card/list-cards/list-cards-usecase";
+import { CreateCardUseCase } from "../../../domain/usecases/card/create-card/create-card-usecase";
 import { CardRepository } from "../../../infra/database/typeorm/repository";
 import { ListCardsController } from "../../controllers/card/list-card/list-cards-controller";
 import { CreateCardController } from "../../controllers/card/create-card/create-card-controller";

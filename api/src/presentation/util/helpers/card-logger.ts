@@ -6,16 +6,16 @@ export const removeUpdateLogger = (
     title: string,
     callback: any
 ) => {
-    if (!["GET", "UPDATE"].includes(method.toUpperCase())) {
-        callback();
+    if (!["DELETE", "PUT"].includes(method.toUpperCase())) {
+        return callback();
     }
 
     // to-do: mudar log após desenvolvimento do update e delete
-    method = method.toUpperCase() === "GET" ? "Listar" : "Alterar";
+    method = method.toUpperCase() === "DELETE" ? "Deletar" : "Alterar";
 
     console.log(
         `${formatDate(new Date())} - Card ${id} - ${title} - ${method}`
     );
 
-    callback();
+    return callback();
 };

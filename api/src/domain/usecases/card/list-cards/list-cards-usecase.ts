@@ -1,5 +1,5 @@
 import { UseCase } from "../..";
-import { ICard } from "../../../entities/card";
+import { ICard, List } from "../../../entities/card";
 import { ICardRepository } from "../../../repositories/card-repository";
 
 export class ListCardsUseCase implements UseCase {

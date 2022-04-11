@@ -13,7 +13,7 @@ export interface LoginReturn {
 
 export class LoginUseCase implements UseCase {
     private getLoginList = (): Auth[] => {
-        return [{ login: "letscode", senha: "lets@123" }];
+        return [{ login: process.env.LOGIN!, senha: process.env.PASSWORD! }];
     };
 
     async run(params: LoginParams): Promise<LoginReturn> {

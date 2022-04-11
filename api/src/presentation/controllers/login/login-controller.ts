@@ -16,9 +16,7 @@ export class LoginController implements Controller {
             const result = await this.loginUseCase.run({ ...request.body });
 
             const token = this.jwtService.createToken(result);
-            return success({
-                token,
-            });
+            return success(token);
         } catch (e) {
             return error(e);
         }

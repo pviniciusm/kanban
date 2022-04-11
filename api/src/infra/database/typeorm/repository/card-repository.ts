@@ -19,4 +19,25 @@ export class CardRepository implements ICardRepository {
     async listAll() {
         return (await this.repository.find()) as ICard[];
     }
+
+    async delete(id: string) {
+        // const card = await this.repository.findOne(id);
+        await this.repository.delete(id);
+    }
+
+    async get(id: string): Promise<ICard | null> {
+        return (await this.repository.findOne(id)) ?? null;
+    }
+
+    async update(card: ICard) {
+        const obtainedCard = await this.repository.findOne(card.id);
+
+        if (obtainedCard) {
+            obtainedCard.content = card.content;
+            obtainedCard.title = card.title;
+            obtainedCard.list = card.list;
+        }
+
+        await this.repository.save(obtainedCard!);
+    }
 }

@@ -1,9 +1,9 @@
-import { ResponseData } from "../../controllers";
 import { DomainError } from "../../../domain/util/errors/domain-error";
-import { ControlerError } from "../errors/controller-error";
+import { ResponseData } from "../contracts/http-data";
+import { ControllerError } from "../errors/controller-error";
 
 export const error = (e: any): ResponseData => {
-    if (e instanceof DomainError || e instanceof ControlerError) {
+    if (e instanceof DomainError || e instanceof ControllerError) {
         return {
             ok: false,
             message: e.message,

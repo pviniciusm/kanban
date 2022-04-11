@@ -1,9 +1,9 @@
+import { Request, Response } from "express";
+import { Controller } from "../../presentation/util/contracts/controller";
 import {
     HttpRequest,
     ResponseData,
-} from "./../../presentation/controllers/index";
-import { Request, Response } from "express";
-import { Controller } from "../../presentation/controllers";
+} from "../../presentation/util/contracts/http-data";
 
 export const mapRequest = async (
     req: Request,

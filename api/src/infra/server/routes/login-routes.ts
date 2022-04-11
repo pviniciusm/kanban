@@ -12,13 +12,11 @@ export class LoginRoutes {
             if (result.ok) {
                 res.setHeader(
                     "authorization",
-                    result.data?.token ? `${result.data.token}` : ""
+                    result.data ? `${result.data}` : ""
                 );
-
-                delete result.data.token;
             }
 
-            return res.status(result.code).send(result);
+            return res.status(result.code).json(result.data);
         });
 
         return routes;
